@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Sell Medicine</h2>
+
+
+<div class="card shadow">
+
+<div class="card-body">
+
+
+<h4>
+{{ medicine.medicine_name }}
+</h4>
+
+
+<p>
+Available Quantity:
+<b>{{ medicine.quantity }}</b>
+</p>
+
+
+<form method="POST">
+
+
+<div class="mb-3">
+
+<label>
+Quantity Sold
+</label>
+
+<input 
+type="number"
+class="form-control"
+name="sold_quantity"
+min="1"
+max="{{ medicine.quantity }}"
+required>
+
+</div>
+
+
+<button class="btn btn-danger">
+Sell Medicine
+</button>
+
+
+<a href="/" class="btn btn-secondary">
+Cancel
+</a>
+
+
+</form>
+
+
+</div>
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">💊 Medicine Inventory</h2>
+
+<div class="mb-3">
+    <a href="/add-medicine" class="btn btn-success">
+        Add New Medicine
+    </a>
+</div>
+
+
+<table class="table table-bordered table-striped shadow">
+
+    <thead class="table-primary">
+
+        <tr>
+            <th>ID</th>
+            <th>Medicine Name</th>
+            <th>Company</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Threshold</th>
+            <th>Expiry Date</th>
+            <th>Action</th>
+        </tr>
+
+    </thead>
+
+
+    <tbody>
+
+        {% for medicine in medicines %}
+
+        <tr>
+
+            <td>{{ medicine.id }}</td>
+
+            <td>{{ medicine.medicine_name }}</td>
+
+            <td>{{ medicine.company }}</td>
+
+            <td>
+                ₹{{ medicine.price }}
+            </td>
+
+            <td>
+
+                {% if medicine.quantity <= medicine.threshold_quantity %}
+
+                    <span class="badge bg-warning text-dark">
+                        {{ medicine.quantity }}
+                    </span>
+
+                {% else %}
+
+                    {{ medicine.quantity }}
+
+                {% endif %}
+
+            </td>
+
+            <td>
+                {{ medicine.threshold_quantity }}
+            </td>
+
+
+            <td>
+                {{ medicine.expiry_date }}
+            </td>
+
+
+            <td>
+
+                <a href="/edit-medicine/{{ medicine.id }}"
+                   class="btn btn-warning btn-sm">
+
+                    Edit
+
+                </a>
+
+
+                <a href="/delete-medicine/{{ medicine.id }}"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('Are you sure you want to delete this medicine?');">
+
+                    Delete
+                 <a href="/sell-medicine/{{ medicine.id }}"
+                  class="btn btn-info btn-sm">
+
+                  Sell
+
+                    </a>            </td>
+
+        </tr>
+
+
+        {% else %}
+
+        <tr>
+
+            <td colspan="8" class="text-center">
+
+                No medicines available
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+
+    </tbody>
+
+</table>
+
+
+{% endblock %}
